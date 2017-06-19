@@ -8,10 +8,11 @@
 	
   	<groupId>com.lwl.activemq</groupId>
   	<artifactId>activemq-service</artifactId>
-  	<packaging>jar</packaging>
+  	<packaging>war</packaging>
   	<version>${internal.version}</version>
   	<name>activemq-service</name>
     <dependencies>
+    	
     	<dependency>
 				<groupId>com.lwl.activemq</groupId>
 				<artifactId>activemq-domain</artifactId>
@@ -40,7 +41,7 @@
 		 <dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-jms</artifactId>
-				<version>${spring.version}</version>
+				<version>3.0.5.RELEASE</version>
 			</dependency>
 		<!-- @ResponseBody把对象转换成json格式 -->
         <dependency>
@@ -70,11 +71,12 @@
 			<artifactId>activemq-pool</artifactId>
 			<version>5.4.2</version>
 		</dependency>
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.apache.activemq</groupId>
 			<artifactId>activemq-web</artifactId>
 			<version>5.4.2</version>
-		</dependency>
+			<scope>provided</scope>
+		</dependency> -->
 		
 		<dependency>
 			<groupId>com.alibaba</groupId>
@@ -82,4 +84,35 @@
 			<version>1.1.35</version>
 		</dependency>
 	</dependencies>
+	<build>
+		<plugins>	
+				<!-- tomcat配置 -->
+			<plugin>
+				<groupId>org.apache.tomcat.maven</groupId>
+				<artifactId>tomcat7-maven-plugin</artifactId>
+				<version>2.2</version>
+				<configuration>
+					<port>8080</port>
+					<uriEncoding>UTF-8</uriEncoding>
+					<path>/${project.artifactId}</path>
+				</configuration>
+			</plugin>
+			<!-- <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>9.2.7.v20150116</version>
+                <configuration>
+                    <httpConnector>
+                        <port>8080</port>
+                    </httpConnector>
+                    <stopKey>stop</stopKey>
+                    <stopPort>4501</stopPort>
+                    <webAppConfig>
+                        <contextPath>/</contextPath>
+                    </webAppConfig>
+                    <scanIntervalSeconds>1</scanIntervalSeconds>
+                </configuration>
+            </plugin> -->
+		</plugins>
+	</build>
 </project>
